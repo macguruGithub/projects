@@ -2,14 +2,12 @@ package com.product.productapp.controller;
 
 import com.product.productapp.dto.ProductDTO;
 import com.product.productapp.dto.Titles;
-import com.product.productapp.projection.ProductProjection;
 import com.product.productapp.repository.ProductServiceRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 public class ProductController {
