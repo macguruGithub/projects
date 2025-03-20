@@ -24,6 +24,6 @@ public interface ProductServiceRepository {
 
     public ResponseEntity<Void> deleteCategory(Long id);
 
-    public ResponseEntity<List<Titles>> gg(String title);
+    public ResponseEntity<List<Titles>> getTitleNames(String title);
 
 }

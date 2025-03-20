@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Setter
 @Getter
-public class ProductDTO {
+public class ProductDTO implements Serializable {
     private Long id;
     private String title;
 

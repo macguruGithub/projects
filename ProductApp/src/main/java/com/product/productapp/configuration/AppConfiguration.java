@@ -29,7 +29,7 @@ public class AppConfiguration {
             Product product = new Product();
             product.setTitle("Product");
             product.setCategory(new Category());
-            List<ProductProjection> chiti = productRepository.hh("chiti");
+            List<ProductProjection> chiti = productRepository.getProductAndCategoryTitleByProductTitle("chiti");
             chiti.forEach(g -> {
                 System.out.println(g.getTitle());
                 System.out.println(g.getCategory().getTitle());

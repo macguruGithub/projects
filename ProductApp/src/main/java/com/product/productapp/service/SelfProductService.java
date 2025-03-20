@@ -126,18 +126,16 @@ public class SelfProductService implements ProductServiceRepository {
     }
 
     @Override
-    public ResponseEntity<List<Titles>> gg(String title) {
-        List<ProductProjection> dd = productRepository.gg(title);
-        List<Titles> gg = dd.stream().map(g -> {
-            String pT = g.getTitle();
-//            String cT = g.getCategory().getTitle();
-            Titles titles1 = new Titles();
-            titles1.setProductTitle(pT);
-            titles1.setCatalogTitle(pT);
-            return titles1;
-        }).toList()
-                ;
-        return ResponseEntity.ok(gg);
+    public ResponseEntity<List<Titles>> getTitleNames(String title) {
+        List<ProductProjection> productProjection = productRepository.getProductAndCategoryTitleByProductTitle(title);
+        List<Titles> titles = productProjection.stream().map(pp -> {
+            String pT = pp.getTitle();
+            Titles titleSet = new Titles();
+            titleSet.setProductTitle(pT);
+            titleSet.setCatalogTitle(pp.getCategory().getTitle());
+            return titleSet;
+        }).toList();
+        return ResponseEntity.ok(titles);
     }
 
     ProductDTO convertProductToProductDTO(Product product) {

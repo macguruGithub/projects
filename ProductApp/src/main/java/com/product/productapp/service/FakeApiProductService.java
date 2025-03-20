@@ -98,7 +98,7 @@ public class FakeApiProductService implements ProductServiceRepository {
     }
 
     @Override
-    public ResponseEntity<List<Titles>> gg(String title) {
+    public ResponseEntity<List<Titles>> getTitleNames(String title) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }
