@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ProductServiceRepository {
-    public ResponseEntity<List<ProductDTO>> getAllProduct();
+    public ResponseEntity<List<ProductDTO>> getAllProduct(int pageIndex, int pageSize);
 
     public ResponseEntity<ProductDTO> getProductById(Long id);
 

@@ -21,10 +21,10 @@ public class ProductController {
         this.productServiceRepository = productServiceRepository;
     }
 
-   @GetMapping("/products")
-   @Cacheable(value = "products")
-   public List<ProductDTO> getAllProducts(){
-        return productServiceRepository.getAllProduct().getBody();
+   @GetMapping("/products/{pageIndex}/{pageSize}")
+   @Cacheable(value = "products", key = "#pageIndex")
+   public List<ProductDTO> getAllProducts(@PathVariable int pageIndex, @PathVariable int pageSize) {
+        return productServiceRepository.getAllProduct(pageIndex, pageSize).getBody();
    }
 
    @GetMapping("products/{id}")

@@ -10,6 +10,9 @@ import com.product.productapp.projection.ProductProjection;
 import com.product.productapp.repository.CategoryRepository;
 import com.product.productapp.repository.ProductRepository;
 import com.product.productapp.repository.ProductServiceRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +30,10 @@ public class SelfProductService implements ProductServiceRepository {
     }
 
     @Override
-    public ResponseEntity<List<ProductDTO>> getAllProduct() {
-        List<Product> products = productRepository.findAll();
+    public ResponseEntity<List<ProductDTO>> getAllProduct(int pageIndex, int pageSize) {
+
+        PageRequest pageRequest = PageRequest.of(pageIndex, pageSize, Sort.Direction.ASC, "title");
+        Page<Product> products = productRepository.findAll(pageRequest);
         List<ProductDTO> list = products.stream().map(this::convertProductToProductDTO).toList();
         return ResponseEntity.ok(list);
     }

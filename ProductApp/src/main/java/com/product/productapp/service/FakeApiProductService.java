@@ -23,7 +23,7 @@ public class FakeApiProductService implements ProductServiceRepository {
     }
 
     @Override
-    public ResponseEntity<List<ProductDTO>> getAllProduct() {
+    public ResponseEntity<List<ProductDTO>> getAllProduct(int pageIndex, int pageSize) {
         ProductFakeApiDTO[] forObject = restTemplate.getForObject("https://fakestoreapi.com/products", ProductFakeApiDTO[].class);
         ProductFakeApiDTO[] products = Optional.ofNullable(forObject).orElse(new ProductFakeApiDTO[]{});
         List<ProductFakeApiDTO> fakeAPIRes = Arrays.stream(products).toList();
