@@ -40,7 +40,7 @@ public class FakeApiProductService implements ProductServiceRepository {
     public ResponseEntity<ProductDTO> getProductById(Long id) {
         ProductFakeApiDTO resp = restTemplate.getForObject("https://fakestoreapi.com/products/" + id, ProductFakeApiDTO.class);
         ProductFakeApiDTO productFakeApiDTO = Optional.ofNullable(resp).orElse(new ProductFakeApiDTO());
-        ProductDTO productDTO = covertToProductDTO(productFakeApiDTO);
+        ProductDTO productDTO = convertToProductDTO(productFakeApiDTO);
         return ResponseEntity.ok(productDTO);
     }
 
@@ -54,7 +54,7 @@ public class FakeApiProductService implements ProductServiceRepository {
         }
         ProductFakeApiDTO productFakeApiDTO = restTemplate.postForObject("https://fakestoreapi.com/products", productFakeApiDTOReq, ProductFakeApiDTO.class);
         assert productFakeApiDTO != null;
-        ProductDTO productDTO = covertToProductDTO(productFakeApiDTO);
+        ProductDTO productDTO = convertToProductDTO(productFakeApiDTO);
         return ResponseEntity.ok(productDTO);
     }
 
@@ -62,11 +62,11 @@ public class FakeApiProductService implements ProductServiceRepository {
     public ResponseEntity<ProductDTO> deleteProduct(Long id) {
         ProductFakeApiDTO productFakeApiDTO = restTemplate.exchange(String.format("https://fakestoreapi.com/products/%s", id), HttpMethod.DELETE, null, ProductFakeApiDTO.class).getBody();
         assert productFakeApiDTO != null;
-        ProductDTO productDTO = covertToProductDTO(productFakeApiDTO);
+        ProductDTO productDTO = convertToProductDTO(productFakeApiDTO);
         return ResponseEntity.ok(productDTO);
     }
 
-    private static ProductDTO covertToProductDTO(ProductFakeApiDTO productFakeApiDTO) {
+    private static ProductDTO convertToProductDTO(ProductFakeApiDTO productFakeApiDTO) {
         AtomicInteger counter = new AtomicInteger();
         assert productFakeApiDTO != null;
         CategoryDTO categoryDTO = new CategoryDTO((long)counter.incrementAndGet(), productFakeApiDTO.getCategory());
